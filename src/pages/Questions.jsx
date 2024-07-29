@@ -45,14 +45,16 @@ function Questions() {
       })
       .catch((error) => {
         console.log(error);
-        navigate('/')
+        navigate("/");
       });
   };
 
   const getResult = async (data) => {
     console.log(data);
     await axios
-      .get(`http://localhost:3000/hasils/${data.id}`)
+      .get(
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`
+      )
       .then((response) => {
         const data = response.data;
         if (data.length > 0) {
@@ -68,7 +70,9 @@ function Questions() {
     checkTokenExpiration()
       .then(async () => {
         await axios
-          .get("http://localhost:3000/questions")
+          .get(
+            "https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/questions"
+          )
           .then((response) => {
             setQuestions(response.data);
           })
@@ -167,7 +171,7 @@ function Questions() {
     localStorage.setItem("bucket", JSON.stringify(bucket));
 
     await axios
-      .post("http://localhost:3000/tests", {
+      .post("https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/tests", {
         answers: bucket,
       })
       .then(() => {

@@ -54,7 +54,7 @@ function Home() {
   const getResult = async (data) => {
     await axios
       .get(
-        `http://localhost:3000/hasils/${data.id}`
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`
       )
       .then((response) => {
         const data = response.data;
@@ -109,7 +109,7 @@ function Home() {
     console.log("start");
     try {
       const responseUserExist = await axios.get(
-        `http://localhost:3000/users/${user.id}`
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/users/${user.id}`
       );
       if (responseUserExist.data) {
         navigate("/question");
@@ -124,7 +124,7 @@ function Home() {
         };
         await axios
           .post(
-            `http://localhost:3000/users`,
+            `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/users`,
             data
           )
           .then(() => {

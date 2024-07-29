@@ -43,7 +43,9 @@ const Result = () => {
 
   const getResult = async (data) => {
     await axios
-      .get(`http://localhost:3000/hasils/${data.id}`)
+      .get(
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`
+      )
       .then((response) => {
         const data = response.data;
 
