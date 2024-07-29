@@ -126,7 +126,6 @@ function Questions() {
 
   const handleNextQuestion = (answer) => {
     setActive(parseInt(answer));
-    setLoading(true);
     let bucket = localStorage.getItem("bucket") || "[]";
     const questionLength = questions.length;
     bucket = JSON.parse(bucket);
@@ -150,11 +149,12 @@ function Questions() {
       setTimeout(() => {
         setLoading(false);
         setActive(0);
-      }, 100);
+      }, 3000);
     }
   };
 
   const handleFinish = async (answer) => {
+    setLoading(true);
     let bucket = localStorage.getItem("bucket") || "[]";
     bucket = JSON.parse(bucket);
     let data = {
@@ -180,7 +180,7 @@ function Questions() {
           setLoading(false);
           setActive(0);
           navigate("/result");
-        }, 1000);
+        }, 100);
       })
       .catch((error) => {
         console.log(error);
@@ -194,6 +194,11 @@ function Questions() {
           TES GAYA BELAJAR
         </h2>
       </header>
+      {loading && (
+        <div className="fixed inset-0 bg-white flex justify-center items-center">
+          <p>LOADING.....</p>
+        </div>
+      )}
       <section className="flex flex-col justify-center items-center gap-5">
         <div className="max-w-5xl space-y-1 md:space-y-5">
           <div className="text-md font-bold rounded-3xl flex justify-center">
