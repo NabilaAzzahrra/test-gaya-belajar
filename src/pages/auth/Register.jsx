@@ -178,9 +178,15 @@ const Register = () => {
                 required
               >
                 <option value="">Pilih</option>
-                <option value="XII 1">XII 1</option>
-                <option value="XII 2">XII 2</option>
-                <option value="XII 3">XII 3</option>
+                <option value="X TKR 1">X TKR 1</option>
+                <option value="X TKR 2">X TKR 2</option>
+                <option value="X TKR 3">X TKR 3</option>
+                <option value="X TSM 1">X TSM 1</option>
+                <option value="X TSM 2">X TSM 2</option>
+                <option value="X TSM 3">X TSM 3</option>
+                <option value="X RPL 1">X RPL 1</option>
+                <option value="X RPL 2">X RPL 2</option>
+                <option value="X RPL 3">X RPL 3</option>
               </select>
               <small className="text-xs text-red-600">{errorsClasses}</small>
             </div>
