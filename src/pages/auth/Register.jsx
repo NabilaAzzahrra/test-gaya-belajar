@@ -184,6 +184,7 @@ const Register = () => {
                 <option value="X TSM 1">X TSM 1</option>
                 <option value="X TSM 2">X TSM 2</option>
                 <option value="X TSM 3">X TSM 3</option>
+                <option value="X TSM 4">X TSM 4</option>
                 <option value="X RPL 1">X RPL 1</option>
                 <option value="X RPL 2">X RPL 2</option>
                 <option value="X RPL 3">X RPL 3</option>
