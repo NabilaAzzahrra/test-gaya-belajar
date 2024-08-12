@@ -136,7 +136,9 @@ function Home() {
           console.error('Error:', error);
           setErrorPage(true);
         }
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       });
   };
 

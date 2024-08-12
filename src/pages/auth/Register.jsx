@@ -125,7 +125,9 @@ const Register = () => {
               }
             }
           }
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
         })
         .catch((error) => {
           const responseError = error.response;
@@ -149,13 +151,15 @@ const Register = () => {
               }
             }
           }
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
         });
     }
   }
 
   const registerHandle = async () => {
-    // setLoading(true);
+    setLoading(true);
     if (whatsapp !== '' && email !== '' && name !== '' && information !== '') {
       const confirmed = confirm(`Berikut data yang akan didaftarkan\n------\nNama lengkap: ${name}\nEmail: ${email}\nNo. Whatsapp: ${whatsapp}\n------\nApakah sudah benar?`)
       const data = {
@@ -204,14 +208,18 @@ const Register = () => {
             }, 1000);
           });
       } else {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
         setWhatsappDisabled(false);
         setEmailDisabled(false);
         setEmail("");
         setEmailShow(false);
       }
     } else {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
       alert('Ada form yang belum diisi!');
     }
   }

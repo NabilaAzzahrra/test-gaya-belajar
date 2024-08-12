@@ -43,11 +43,15 @@ const Login = () => {
           if (error.response.status == 404) {
             alert(error.response.data.message);
           }
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
         });
     } else {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
       alert('Ada form yang belum diisi!');
-      setLoading(false);
     }
   }
 
