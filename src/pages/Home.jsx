@@ -78,6 +78,7 @@ function Home() {
             console.error('Error refreshing token or fetching profile:', error);
             if (error.response && error.response.status === 400) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/')
             }
           }
         } else {
@@ -174,9 +175,11 @@ function Home() {
             console.error('Error refreshing token or fetching profile:', error);
             if (error.response && error.response.status === 400) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/')
             }
             if (error.response && error.response.status === 401) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/')
             }
           }
         } else {

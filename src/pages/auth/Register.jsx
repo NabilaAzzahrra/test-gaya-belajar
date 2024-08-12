@@ -263,6 +263,7 @@ const Register = () => {
             console.error('Error refreshing token or fetching profile:', error);
             if (error.response && error.response.status === 400) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/')
             }
           }
         } else {
