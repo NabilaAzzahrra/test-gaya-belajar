@@ -268,7 +268,11 @@ const Register = () => {
           }
         } else {
           console.error('Error fetching profile:', profileError);
+          localStorage.removeItem('LP3ITGB:token');
           setErrorPage(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
         }
       }
     } catch (error) {

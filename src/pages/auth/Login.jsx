@@ -93,10 +93,15 @@ const Login = () => {
           }
         } else {
           console.error('Error fetching profile:', profileError);
+          localStorage.removeItem('LP3ITGB:token');
           setErrorPage(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
         }
       }
     } catch (error) {
+      console.log(error);
       if (error.response) {
         if ([400, 403].includes(error.response.status)) {
           localStorage.removeItem('LP3ITGB:token');

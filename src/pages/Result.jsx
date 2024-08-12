@@ -83,7 +83,11 @@ const Result = () => {
           }
         } else {
           console.error('Error fetching profile:', profileError);
+          localStorage.removeItem('LP3ITGB:token');
           setErrorPage(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
         }
       }
     } catch (error) {
@@ -167,9 +171,11 @@ const Result = () => {
             console.error('Error refreshing token or fetching profile:', error);
             if (error.response && error.response.status === 400) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/');
             }
             if (error.response && error.response.status === 401) {
               localStorage.removeItem('LP3ITGB:token');
+              navigate('/');
             }
           }
         } else {
