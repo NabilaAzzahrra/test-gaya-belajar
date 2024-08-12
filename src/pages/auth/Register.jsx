@@ -321,15 +321,15 @@ const Register = () => {
       loading ? (
         <LoadingScreen />
       ) : (
-        <main className='flex flex-col items-center justify-center bg-gradient-to-b from-lp3i-400 via-lp3i-200 to-lp3i-400 h-screen p-5 space-y-4'>
+        <main className={`flex flex-col items-center justify-center bg-gradient-to-b from-lp3i-400 via-lp3i-200 to-lp3i-400 h-screen p-5 space-y-4`}>
           <nav className='flex items-center gap-3 py-3'>
             <img src={LogoLP3IPutih} alt="" width={180} />
             <img src={LogoTagline} alt="" width={110} />
           </nav>
-          <div className='max-w-lg w-full bg-white p-10 rounded-3xl shadow-xl space-y-6'>
+          <div className='max-w-2xl w-full bg-white p-10 rounded-3xl shadow-xl space-y-6'>
             <div className="space-y-4">
-              <form onSubmit={(e) => checkValidation(e, 'phone')} method='POST' className='space-y-4'>
-                <div>
+              <form onSubmit={(e) => checkValidation(e, 'phone')} method='POST' className='flex items-center gap-4'>
+                <div className='w-full'>
                   <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
                     Nama lengkap
                   </label>
@@ -347,7 +347,7 @@ const Register = () => {
                     }
                   </ul>
                 </div>
-                <div>
+                <div className='w-full'>
                   <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
                     No. Whatsapp
                   </label>
@@ -397,7 +397,7 @@ const Register = () => {
               {
                 emailShow &&
                 <form onSubmit={(e) => checkValidation(e, 'email')} method='POST' className='space-y-4'>
-                  <div>
+                  <div className='w-full'>
                     <label htmlFor="information" className="block mb-2 text-sm font-medium text-gray-900">Sumber Informasi</label>
                     <select id="information" defaultValue={information} onChange={(e) => setInformation(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3" required={true}>
                       <option disabled>Pilih</option>
@@ -420,45 +420,47 @@ const Register = () => {
                       }
                     </ul>
                   </div>
-                  <div>
-                    <label htmlFor="school" className="block mb-2 text-sm font-medium text-gray-900">Sekolah</label>
-                    <CreatableSelect type="text" id="school" styles={{ fontFamily: 'Rubik' }} options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Sekolah' required={true} />
-                    <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
-                      {
-                        errors.school.length > 0 &&
-                        <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
-                          {errors.school.map((error, index) => (
-                            <li className="font-regular" key={index}>{error}</li>
-                          ))}
-                        </ul>
-                      }
-                    </ul>
-                  </div>
-                  <div>
-                    <label htmlFor="classes" className="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
-                    <select id="classes" defaultValue={classes} onChange={(e) => setClasses(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3" required={true}>
-                      <option disabled>Pilih</option>
-                      <option value="X TKR 1">X TKR 1</option>
-                      <option value="X TKR 2">X TKR 2</option>
-                      <option value="X TKR 3">X TKR 3</option>
-                      <option value="X TSM 1">X TSM 1</option>
-                      <option value="X TSM 2">X TSM 2</option>
-                      <option value="X TSM 3">X TSM 3</option>
-                      <option value="X TSM 4">X TSM 4</option>
-                      <option value="X RPL 1">X RPL 1</option>
-                      <option value="X RPL 2">X RPL 2</option>
-                      <option value="X RPL 3">X RPL 3</option>
-                    </select>
-                    <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
-                      {
-                        errors.classes.length > 0 &&
-                        <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
-                          {errors.classes.map((error, index) => (
-                            <li className="font-regular" key={index}>{error}</li>
-                          ))}
-                        </ul>
-                      }
-                    </ul>
+                  <div className='flex items-center gap-4'>
+                    <div className='w-full'>
+                      <label htmlFor="school" className="block mb-2 text-sm font-medium text-gray-900">Sekolah</label>
+                      <CreatableSelect type="text" id="school" styles={{ fontFamily: 'Rubik' }} options={schoolsAPI} value={selectedSchool} onChange={schoolHandle} placeholder='Sekolah' required={true} />
+                      <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
+                        {
+                          errors.school.length > 0 &&
+                          <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
+                            {errors.school.map((error, index) => (
+                              <li className="font-regular" key={index}>{error}</li>
+                            ))}
+                          </ul>
+                        }
+                      </ul>
+                    </div>
+                    <div className='w-full'>
+                      <label htmlFor="classes" className="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
+                      <select id="classes" defaultValue={classes} onChange={(e) => setClasses(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3" required={true}>
+                        <option disabled>Pilih</option>
+                        <option value="X TKR 1">X TKR 1</option>
+                        <option value="X TKR 2">X TKR 2</option>
+                        <option value="X TKR 3">X TKR 3</option>
+                        <option value="X TSM 1">X TSM 1</option>
+                        <option value="X TSM 2">X TSM 2</option>
+                        <option value="X TSM 3">X TSM 3</option>
+                        <option value="X TSM 4">X TSM 4</option>
+                        <option value="X RPL 1">X RPL 1</option>
+                        <option value="X RPL 2">X RPL 2</option>
+                        <option value="X RPL 3">X RPL 3</option>
+                      </select>
+                      <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
+                        {
+                          errors.classes.length > 0 &&
+                          <ul className="ml-2 mt-2 text-xs text-red-600 list-disc">
+                            {errors.classes.map((error, index) => (
+                              <li className="font-regular" key={index}>{error}</li>
+                            ))}
+                          </ul>
+                        }
+                      </ul>
+                    </div>
                   </div>
                   <div>
                     <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
