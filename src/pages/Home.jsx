@@ -33,7 +33,7 @@ function Home() {
       setUser(decoded.data);
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('http://localhost:3000/pmb/profiles/v1', {
+        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -55,7 +55,7 @@ function Home() {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('http://localhost:3000/pmb/auth/token/v2', {
+            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
               withCredentials: true,
             });
 
@@ -111,7 +111,7 @@ function Home() {
 
   const getResult = async (data) => {
     await axios
-      .get(`http://localhost:3000/gayabelajar/hasils/${data.id}`)
+      .get(`https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`)
       .then((response) => {
         setResult(response.data);
       })
@@ -140,7 +140,7 @@ function Home() {
     if (confirmed) {
       try {
         const token = localStorage.getItem('LP3ITGB:token');
-        const responseData = await axios.delete('http://localhost:3000/pmb/auth/logout/v2', {
+        const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
           headers: {
             Authorization: token
           }
@@ -154,12 +154,12 @@ function Home() {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           try {
-            const response = await axios.get('http://localhost:3000/pmb/auth/token/v2', {
+            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
               withCredentials: true,
             });
 
             const newToken = response.data;
-            const responseData = await axios.delete('http://localhost:3000/pmb/auth/logout/v2', {
+            const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
               headers: {
                 Authorization: newToken
               }
@@ -191,7 +191,7 @@ function Home() {
     setLoading(true);
     try {
       const responseUserExist = await axios.get(
-        `http://localhost:3000/gayabelajar/users/${user.id}`
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/users/${user.id}`
       );
       if (responseUserExist.data) {
         navigate("/question");
@@ -206,7 +206,7 @@ function Home() {
           setUser(decoded.data);
 
           const fetchProfile = async (token) => {
-            const response = await axios.get('http://localhost:3000/pmb/profiles/v1', {
+            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
               headers: { Authorization: token },
               withCredentials: true,
             });
@@ -224,7 +224,7 @@ function Home() {
               classes: profileData.applicant.class,
               status: decoded.data.status,
             };
-            const responseUser = await axios.post(`http://localhost:3000/gayabelajar/users`, data);
+            const responseUser = await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/users`, data);
             if (responseUser) {
               setTimeout(() => {
                 setLoading(false);
@@ -234,7 +234,7 @@ function Home() {
           } catch (profileError) {
             if (profileError.response && profileError.response.status === 403) {
               try {
-                const response = await axios.get('http://localhost:3000/pmb/auth/token/v2', {
+                const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
                   withCredentials: true,
                 });
 
@@ -252,7 +252,7 @@ function Home() {
                   classes: newProfileData.applicant.class,
                   status: decodedNewToken.data.status,
                 };
-                const responseUser = await axios.post(`http://localhost:3000/gayabelajar/users`, data);
+                const responseUser = await axios.post(`https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/users`, data);
                 if (responseUser) {
                   setTimeout(() => {
                     setLoading(false);

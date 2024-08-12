@@ -31,7 +31,7 @@ const Result = () => {
       setUser(decoded.data);
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('http://localhost:3000/pmb/profiles/v1', {
+        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -54,7 +54,7 @@ const Result = () => {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('http://localhost:3000/pmb/auth/token/v2', {
+            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
               withCredentials: true,
             });
 
@@ -113,7 +113,7 @@ const Result = () => {
   const getResult = async (data) => {
     await axios
       .get(
-        `http://localhost:3000/gayabelajar/hasils/${data.id}`
+        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`
       )
       .then((response) => {
         setResult(response.data);
@@ -133,7 +133,7 @@ const Result = () => {
           navigate('/login');
           return;
         }
-        const responseData = await axios.delete('http://localhost:3000/pmb/auth/logout/v2', {
+        const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
           headers: {
             Authorization: token
           }
@@ -147,12 +147,12 @@ const Result = () => {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           try {
-            const response = await axios.get('http://localhost:3000/pmb/auth/token/v2', {
+            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
               withCredentials: true,
             });
 
             const newToken = response.data;
-            const responseData = await axios.delete('http://localhost:3000/pmb/auth/logout/v2', {
+            const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
               headers: {
                 Authorization: newToken
               }
