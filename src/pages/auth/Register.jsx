@@ -174,6 +174,8 @@ const Register = () => {
         classes: classes,
         information: information
       }
+      console.log(data);
+      
       if (confirmed) {
         await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/register/v2', data, {
           withCredentials: true

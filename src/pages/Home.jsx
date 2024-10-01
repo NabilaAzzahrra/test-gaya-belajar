@@ -91,6 +91,7 @@ function Home() {
         }
       }
     } catch (error) {
+      console.log(error);
       if (error.response) {
         if ([400, 403].includes(error.response.status)) {
           localStorage.removeItem('LP3ITGB:token');
@@ -121,24 +122,25 @@ function Home() {
         setResult(response.data);
       })
       .catch((error) => {
-        if (error.response) {
-          if ([400, 403].includes(error.response.status)) {
-            localStorage.removeItem('LP3ITGB:token');
-            navigate('/');
-          } else {
-            console.error('Unexpected HTTP error:', error);
-            setErrorPage(true);
-          }
-        } else if (error.request) {
-          console.error('Network error:', error);
-          setErrorPage(true);
-        } else {
-          console.error('Error:', error);
-          setErrorPage(true);
-        }
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+        console.log(error);
+        // if (error.response) {
+        //   if ([400, 403].includes(error.response.status)) {
+        //     localStorage.removeItem('LP3ITGB:token');
+        //     navigate('/');
+        //   } else {
+        //     console.error('Unexpected HTTP error:', error);
+        //     setErrorPage(true);
+        //   }
+        // } else if (error.request) {
+        //   console.error('Network error:', error);
+        //   setErrorPage(true);
+        // } else {
+        //   console.error('Error:', error);
+        //   setErrorPage(true);
+        // }
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 1000);
       });
   };
 
@@ -270,37 +272,38 @@ function Home() {
                 }
               } catch (error) {
                 console.error('Error refreshing token or fetching profile:', error);
-                if (error.response && error.response.status === 400) {
-                  localStorage.removeItem('LP3ITGB:token');
-                  navigate('/');
-                }
+                // if (error.response && error.response.status === 400) {
+                //   localStorage.removeItem('LP3ITGB:token');
+                //   navigate('/');
+                // }
               }
             } else {
               console.error('Error fetching profile:', profileError);
-              localStorage.removeItem('LP3ITGB:token');
-              setErrorPage(true);
-              setTimeout(() => {
-                navigate('/');
-              }, 2000);
+              // localStorage.removeItem('LP3ITGB:token');
+              // setErrorPage(true);
+              // setTimeout(() => {
+              //   navigate('/');
+              // }, 2000);
             }
           }
         } catch (error) {
-          if (error.response) {
-            if ([400, 403].includes(error.response.status)) {
-              localStorage.removeItem('LP3ITGB:token');
-              navigate('/');
-            } else {
-              console.error('Unexpected HTTP error:', error);
-              setErrorPage(true);
-            }
-          } else if (error.request) {
-            console.error('Network error:', error);
-            setErrorPage(true);
-          } else {
-            console.error('Error:', error);
-            setErrorPage(true);
-          }
-          navigate('/');
+          console.log(error);
+          // if (error.response) {
+          //   if ([400, 403].includes(error.response.status)) {
+          //     localStorage.removeItem('LP3ITGB:token');
+          //     navigate('/');
+          //   } else {
+          //     console.error('Unexpected HTTP error:', error);
+          //     setErrorPage(true);
+          //   }
+          // } else if (error.request) {
+          //   console.error('Network error:', error);
+          //   setErrorPage(true);
+          // } else {
+          //   console.error('Error:', error);
+          //   setErrorPage(true);
+          // }
+          // navigate('/');
         } finally {
           setTimeout(() => {
             setLoading(false);
