@@ -50,7 +50,7 @@ const Register = () => {
 
   const getSchools = async () => {
     await axios
-      .get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/schools`)
+      .get(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/schools`)
       .then((response) => {
         let bucket = [];
         let dataSchools = response.data;
@@ -104,7 +104,7 @@ const Register = () => {
       } else if (field == 'email') {
         value = email;
       }
-      await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/validation', {
+      await axios.post('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/auth/validation', {
         value: value,
         field: field
       })
@@ -171,7 +171,7 @@ const Register = () => {
         information: information
       }
       if (confirmed) {
-        await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/register/v2', data, {
+        await axios.post('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/auth/register/v2', data, {
           withCredentials: true
         })
           .then((response) => {
@@ -225,7 +225,7 @@ const Register = () => {
   }
 
   const getPresenters = async () => {
-    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/presenters`)
+    await axios.get(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/presenters`)
       .then((response) => {
         setPresenters(response.data)
       })
@@ -242,7 +242,7 @@ const Register = () => {
       }
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+        const response = await axios.get('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -257,7 +257,7 @@ const Register = () => {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/auth/token/v2', {
               withCredentials: true,
             });
 

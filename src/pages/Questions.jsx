@@ -34,7 +34,7 @@ function Questions() {
       setUser(decoded.data);
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+        const response = await axios.get('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -57,7 +57,7 @@ function Questions() {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/pmb/auth/token/v2', {
               withCredentials: true,
             });
 
@@ -120,7 +120,7 @@ function Questions() {
   const getResult = async (data) => {
     await axios
       .get(
-        `https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/hasils/${data.id}`
+        `https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/hasils/${data.id}`
       )
       .then((response) => {
         const data = response.data;
@@ -136,7 +136,7 @@ function Questions() {
   const getQuestions = async () => {
     await axios
       .get(
-        "https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/questions"
+        "https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/questions"
       )
       .then((response) => {
         setQuestions(response.data);
@@ -207,7 +207,7 @@ function Questions() {
     localStorage.setItem("bucket", JSON.stringify(bucket));
 
     await axios
-      .post("https://api.politekniklp3i-tasikmalaya.ac.id/gayabelajar/tests", {
+      .post("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/tests", {
         answers: bucket,
       })
       .then(() => {
