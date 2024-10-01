@@ -229,7 +229,11 @@ const Register = () => {
   }
 
   const getPresenters = async () => {
-    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/presenters`)
+    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/presenters`, {
+      headers: {
+        'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
+      }
+    })
       .then((response) => {
         setPresenters(response.data)
       })
