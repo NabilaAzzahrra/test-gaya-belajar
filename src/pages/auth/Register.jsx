@@ -50,7 +50,11 @@ const Register = () => {
 
   const getSchools = async () => {
     await axios
-      .get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/schools`)
+      .get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/schools`, {
+        headers: {
+          'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
+        }
+      })
       .then((response) => {
         let bucket = [];
         let dataSchools = response.data;
