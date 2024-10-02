@@ -117,7 +117,7 @@ const Result = () => {
   const getResult = async (data) => {
     await axios
       .get(
-        `https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/hasils/${data.id}`
+        `https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/hasils/${data.id}`
       )
       .then((response) => {
         setResult(response.data);

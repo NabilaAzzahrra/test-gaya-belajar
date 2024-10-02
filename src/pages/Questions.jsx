@@ -120,7 +120,7 @@ function Questions() {
   const getResult = async (data) => {
     await axios
       .get(
-        `https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/hasils/${data.id}`
+        `https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/hasils/${data.id}`
       )
       .then((response) => {
         const data = response.data;
@@ -136,7 +136,7 @@ function Questions() {
   const getQuestions = async () => {
     await axios
       .get(
-        "https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/questions"
+        "https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/questions"
       )
       .then((response) => {
         setQuestions(response.data);
@@ -207,7 +207,7 @@ function Questions() {
     localStorage.setItem("bucket", JSON.stringify(bucket));
 
     await axios
-      .post("https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/tests", {
+      .post("https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/tests", {
         answers: bucket,
       })
       .then(() => {

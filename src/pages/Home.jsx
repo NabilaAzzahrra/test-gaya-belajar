@@ -117,7 +117,7 @@ function Home() {
 
   const getResult = async (data) => {
     await axios
-      .get(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/hasils/${data.id}`)
+      .get(`https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/hasils/${data.id}`)
       .then((response) => {
         setResult(response.data);
       })
@@ -202,7 +202,7 @@ function Home() {
     setLoading(true);
     try {
       const responseUserExist = await axios.get(
-        `https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/users/${user.id}`
+        `https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/users/${user.id}`
       );
       if (responseUserExist.data) {
         navigate("/question");
@@ -235,7 +235,7 @@ function Home() {
               classes: profileData.applicant.class,
               status: decoded.data.status,
             };
-            const responseUser = await axios.post(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/users`, data);
+            const responseUser = await axios.post(`https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/users`, data);
             if (responseUser) {
               setTimeout(() => {
                 setLoading(false);
@@ -263,7 +263,7 @@ function Home() {
                   classes: newProfileData.applicant.class,
                   status: decodedNewToken.data.status,
                 };
-                const responseUser = await axios.post(`https://elearning.politekniklp3i-tasikmalaya.ac.id:8444/gayabelajar/users`, data);
+                const responseUser = await axios.post(`https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/users`, data);
                 if (responseUser) {
                   setTimeout(() => {
                     setLoading(false);
