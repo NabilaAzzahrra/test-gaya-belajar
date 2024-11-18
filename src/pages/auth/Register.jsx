@@ -50,7 +50,7 @@ const Register = () => {
 
   const getSchools = async () => {
     await axios
-      .get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/schools`, {
+      .get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/schools`, {
         headers: {
           'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
         }
@@ -108,7 +108,7 @@ const Register = () => {
       } else if (field == 'email') {
         value = email;
       }
-      await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/validation', {
+      await axios.post('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/validation', {
         value: value,
         field: field
       })
@@ -177,7 +177,7 @@ const Register = () => {
       console.log(data);
       
       if (confirmed) {
-        await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/register/v2', data, {
+        await axios.post('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/register/v2', data, {
           withCredentials: true
         })
           .then((response) => {
@@ -231,7 +231,7 @@ const Register = () => {
   }
 
   const getPresenters = async () => {
-    await axios.get(`https://api.politekniklp3i-tasikmalaya.ac.id/pmb/presenters`, {
+    await axios.get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/presenters`, {
       headers: {
         'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
       }
@@ -252,7 +252,7 @@ const Register = () => {
       }
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+        const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -267,7 +267,7 @@ const Register = () => {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/token/v2', {
               withCredentials: true,
             });
 

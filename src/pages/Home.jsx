@@ -33,7 +33,7 @@ function Home() {
       setUser(decoded.data);
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+        const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -55,7 +55,7 @@ function Home() {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/token/v2', {
               withCredentials: true,
             });
 
@@ -123,24 +123,24 @@ function Home() {
       })
       .catch((error) => {
         console.log(error);
-        // if (error.response) {
-        //   if ([400, 403].includes(error.response.status)) {
-        //     localStorage.removeItem('LP3ITGB:token');
-        //     navigate('/');
-        //   } else {
-        //     console.error('Unexpected HTTP error:', error);
-        //     setErrorPage(true);
-        //   }
-        // } else if (error.request) {
-        //   console.error('Network error:', error);
-        //   setErrorPage(true);
-        // } else {
-        //   console.error('Error:', error);
-        //   setErrorPage(true);
-        // }
-        // setTimeout(() => {
-        //   setLoading(false);
-        // }, 1000);
+        if (error.response) {
+          if ([400, 403].includes(error.response.status)) {
+            localStorage.removeItem('LP3ITGB:token');
+            navigate('/');
+          } else {
+            console.error('Unexpected HTTP error:', error);
+            setErrorPage(true);
+          }
+        } else if (error.request) {
+          console.error('Network error:', error);
+          setErrorPage(true);
+        } else {
+          console.error('Error:', error);
+          setErrorPage(true);
+        }
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       });
   };
 
@@ -149,7 +149,7 @@ function Home() {
     if (confirmed) {
       try {
         const token = localStorage.getItem('LP3ITGB:token');
-        const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
+        const responseData = await axios.delete('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/logout/v2', {
           headers: {
             Authorization: token
           }
@@ -163,12 +163,12 @@ function Home() {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/token/v2', {
               withCredentials: true,
             });
 
             const newToken = response.data;
-            const responseData = await axios.delete('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/logout/v2', {
+            const responseData = await axios.delete('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/logout/v2', {
               headers: {
                 Authorization: newToken
               }
@@ -217,7 +217,7 @@ function Home() {
           setUser(decoded.data);
 
           const fetchProfile = async (token) => {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+            const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
               headers: { Authorization: token },
               withCredentials: true,
             });
@@ -245,7 +245,7 @@ function Home() {
           } catch (profileError) {
             if (profileError.response && profileError.response.status === 403) {
               try {
-                const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+                const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/token/v2', {
                   withCredentials: true,
                 });
 
@@ -272,38 +272,38 @@ function Home() {
                 }
               } catch (error) {
                 console.error('Error refreshing token or fetching profile:', error);
-                // if (error.response && error.response.status === 400) {
-                //   localStorage.removeItem('LP3ITGB:token');
-                //   navigate('/');
-                // }
+                if (error.response && error.response.status === 400) {
+                  localStorage.removeItem('LP3ITGB:token');
+                  navigate('/');
+                }
               }
             } else {
               console.error('Error fetching profile:', profileError);
-              // localStorage.removeItem('LP3ITGB:token');
-              // setErrorPage(true);
-              // setTimeout(() => {
-              //   navigate('/');
-              // }, 2000);
+              localStorage.removeItem('LP3ITGB:token');
+              setErrorPage(true);
+              setTimeout(() => {
+                navigate('/');
+              }, 2000);
             }
           }
         } catch (error) {
           console.log(error);
-          // if (error.response) {
-          //   if ([400, 403].includes(error.response.status)) {
-          //     localStorage.removeItem('LP3ITGB:token');
-          //     navigate('/');
-          //   } else {
-          //     console.error('Unexpected HTTP error:', error);
-          //     setErrorPage(true);
-          //   }
-          // } else if (error.request) {
-          //   console.error('Network error:', error);
-          //   setErrorPage(true);
-          // } else {
-          //   console.error('Error:', error);
-          //   setErrorPage(true);
-          // }
-          // navigate('/');
+          if (error.response) {
+            if ([400, 403].includes(error.response.status)) {
+              localStorage.removeItem('LP3ITGB:token');
+              navigate('/');
+            } else {
+              console.error('Unexpected HTTP error:', error);
+              setErrorPage(true);
+            }
+          } else if (error.request) {
+            console.error('Network error:', error);
+            setErrorPage(true);
+          } else {
+            console.error('Error:', error);
+            setErrorPage(true);
+          }
+          navigate('/');
         } finally {
           setTimeout(() => {
             setLoading(false);
@@ -328,7 +328,7 @@ function Home() {
         <LoadingScreen />
       ) : (
         <section className="bg-white h-screen relative bg-cover">
-          <main className="container mx-auto flex flex-col justify-center items-center h-screen px-5 gap-5">
+          <main className="max-w-xl container mx-auto flex flex-col justify-center items-center h-screen px-5 gap-5">
             <div className="flex justify-between gap-5">
               <img src={logoLp3i} alt="logo lp3i" className="h-14" />
               <img src={logoTagline} alt="logo lp3i" className="h-12" />
