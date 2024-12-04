@@ -206,8 +206,7 @@ function Questions() {
     bucket.push(data);
     localStorage.setItem("bucket", JSON.stringify(bucket));
 
-    await axios
-      .post("https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/tests", {
+    await axios.post("https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/tests", {
         answers: bucket,
       })
       .then(() => {
@@ -298,7 +297,7 @@ function Questions() {
                 <p className="text-xs text-center text-gray-500 px-6 xl:text-md">
                   © A Chapman and V Chislett MSc 2005, diambil dari{" "}
                   <span className="italic">
-                    Gardner's Multiple Intelligences Model
+                    Gardner&apos;s Multiple Intelligences Model
                   </span>
                   . From <span className="italic">www.businessballs.com</span>{" "}
                   dengan item yang telah dimodifikasi. Tidak untuk dijual dan
@@ -310,7 +309,7 @@ function Questions() {
           </section>
           <footer>
             <marquee className="text-xs text-gray-500">
-              Tidak ada jawaban 'benar' atau 'salah' disini, jadilah dirimu sendiri
+              Tidak ada jawaban &apos;benar&apos; atau &apos;salah&apos; disini, jadilah dirimu sendiri
               ketika mengisi jawaban
             </marquee>
           </footer>

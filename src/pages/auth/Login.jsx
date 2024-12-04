@@ -27,7 +27,9 @@ const Login = () => {
       await axios.post('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/login/v2', {
         email: email,
         password: password,
-      }, { withCredentials: true })
+      }, { 
+        withCredentials: true
+      })
         .then((response) => {
           localStorage.setItem('LP3ITGB:token', response.data.token)
           alert(response.data.message);

@@ -49,8 +49,7 @@ const Register = () => {
   });
 
   const getSchools = async () => {
-    await axios
-      .get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/schools`, {
+    await axios.get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/schools`,{
         headers: {
           'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
         }
@@ -231,7 +230,7 @@ const Register = () => {
   }
 
   const getPresenters = async () => {
-    await axios.get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/presenters`, {
+    await axios.get(`https://pmb-api.politekniklp3i-tasikmalaya.ac.id/presenters`,{
       headers: {
         'lp3i-api-key': 'aEof9XqcH34k3g6IbJcQLxGY'
       }
