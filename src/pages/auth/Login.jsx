@@ -24,10 +24,12 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     if (email !== '' && password !== '') {
-      await axios.post('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/login/v2', {
+      await axios.post('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/login/v2', {
         email: email,
         password: password,
-      }, { withCredentials: true })
+      }, { 
+        withCredentials: true
+      })
         .then((response) => {
           localStorage.setItem('LP3ITGB:token', response.data.token)
           alert(response.data.message);
@@ -63,7 +65,7 @@ const Login = () => {
       }
 
       const fetchProfile = async (token) => {
-        const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/profiles/v1', {
+        const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
           headers: { Authorization: token },
           withCredentials: true,
         });
@@ -78,7 +80,7 @@ const Login = () => {
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
           try {
-            const response = await axios.get('https://api.politekniklp3i-tasikmalaya.ac.id/pmb/auth/token/v2', {
+            const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/auth/token/v2', {
               withCredentials: true,
             });
 
