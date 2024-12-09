@@ -3,10 +3,11 @@ import Lottie from 'lottie-react'
 import { jwtDecode } from 'jwt-decode'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import questionImage from '../assets/img/question.json';
 
-import ServerError from './errors/ServerError'
 import LoadingScreen from './LoadingScreen'
+import ServerError from './errors/ServerError'
 
 function Questions() {
   const [questions, setQuestions] = useState([]);
@@ -15,7 +16,9 @@ function Questions() {
   const [active, setActive] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    name: 'Loading...'
+  });
 
   const [errorPage, setErrorPage] = useState(false);
 
@@ -31,7 +34,6 @@ function Questions() {
       }
 
       const decoded = jwtDecode(token);
-      setUser(decoded.data);
 
       const fetchProfile = async (token) => {
         const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
@@ -64,7 +66,6 @@ function Questions() {
             const newToken = response.data;
             const decodedNewToken = jwtDecode(newToken);
             localStorage.setItem('LP3ITGB:token', newToken);
-            setUser(decodedNewToken.data);
             const newProfileData = await fetchProfile(newToken);
             const data = {
               id: decodedNewToken.data.id,
@@ -147,7 +148,7 @@ function Questions() {
   };
 
   const bucketQuestion = () => {
-    let bucket = localStorage.getItem("bucket") || "[]";
+    let bucket = localStorage.getItem("LP3ITGB:bucket") || "[]";
     bucket = JSON.parse(bucket);
     if (bucket.length > 0) {
       const lastData = bucket[bucket.length - 1];
@@ -162,7 +163,7 @@ function Questions() {
   const handleNextQuestion = (answer) => {
     setLoading(true);
     setActive(parseInt(answer));
-    let bucket = localStorage.getItem("bucket") || "[]";
+    let bucket = localStorage.getItem("LP3ITGB:bucket") || "[]";
     const questionLength = questions.length;
     bucket = JSON.parse(bucket);
     if (currentQuestion + 1 === questionLength) {
@@ -179,7 +180,7 @@ function Questions() {
         sekolah: user.school,
       };
       bucket.push(data);
-      localStorage.setItem("bucket", JSON.stringify(bucket));
+      localStorage.setItem("LP3ITGB:bucket", JSON.stringify(bucket));
       setSelectedOption(null);
       setCurrentQuestion(currentQuestion + 1);
       setTimeout(() => {
@@ -191,7 +192,7 @@ function Questions() {
 
   const handleFinish = async (answer) => {
     setLoading(true);
-    let bucket = localStorage.getItem("bucket") || "[]";
+    let bucket = localStorage.getItem("LP3ITGB:bucket") || "[]";
     bucket = JSON.parse(bucket);
     let data = {
       question: currentQuestion + 1,
@@ -204,13 +205,13 @@ function Questions() {
       sekolah: user.school,
     };
     bucket.push(data);
-    localStorage.setItem("bucket", JSON.stringify(bucket));
+    localStorage.setItem("LP3ITGB:bucket", JSON.stringify(bucket));
 
     await axios.post("https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/tests", {
-        answers: bucket,
-      })
+      answers: bucket,
+    })
       .then(() => {
-        localStorage.removeItem("bucket");
+        localStorage.removeItem("LP3ITGB:bucket");
         setTimeout(() => {
           setLoading(false);
           setActive(0);
@@ -229,7 +230,7 @@ function Questions() {
   }, []);
 
   useEffect(() => {
-    const bucket = localStorage.getItem("bucket");
+    const bucket = localStorage.getItem("LP3ITGB:bucket");
     if (bucket) {
       const parsedData = JSON.parse(bucket);
       if (parsedData.length > 0) {

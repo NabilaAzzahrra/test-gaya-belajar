@@ -4,11 +4,12 @@ import { jwtDecode } from 'jwt-decode'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import LoadingScreen from './LoadingScreen'
-import ServerError from './errors/ServerError'
 import logoLp3i from '../assets/img/logo-lp3i.png'
 import awanLp3i from '../assets/img/awan-lp3i.json'
 import logoTagline from '../assets/img/tagline-warna.png'
+
+import LoadingScreen from './LoadingScreen'
+import ServerError from './errors/ServerError'
 
 function Home() {
   const navigate = useNavigate();
@@ -30,7 +31,6 @@ function Home() {
       }
 
       const decoded = jwtDecode(token);
-      setUser(decoded.data);
 
       const fetchProfile = async (token) => {
         const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
@@ -51,6 +51,7 @@ function Home() {
           classes: profileData.applicant.class,
           status: decoded.data.status,
         };
+        setUser(data);
         getResult(data);
       } catch (profileError) {
         if (profileError.response && profileError.response.status === 403) {
@@ -62,7 +63,6 @@ function Home() {
             const newToken = response.data;
             const decodedNewToken = jwtDecode(newToken);
             localStorage.setItem('LP3ITGB:token', newToken);
-            setUser(decodedNewToken.data);
             const newProfileData = await fetchProfile(newToken);
             const data = {
               id: decodedNewToken.data.id,
@@ -73,6 +73,7 @@ function Home() {
               classes: newProfileData.applicant.class,
               status: decodedNewToken.data.status,
             };
+            setUser(data);
             getResult(data);
           } catch (error) {
             console.error('Error refreshing token or fetching profile:', error);
@@ -122,7 +123,6 @@ function Home() {
         setResult(response.data);
       })
       .catch((error) => {
-        console.log(error);
         if (error.response) {
           if ([400, 403].includes(error.response.status)) {
             localStorage.removeItem('LP3ITGB:token');
@@ -157,7 +157,7 @@ function Home() {
         if (responseData) {
           alert(responseData.data.message);
           localStorage.removeItem('LP3ITGB:token');
-          localStorage.removeItem("bucket");
+          localStorage.removeItem("LP3ITGB:bucket");
           navigate('/')
         }
       } catch (error) {
@@ -176,7 +176,7 @@ function Home() {
             if (responseData) {
               alert(responseData.data.message);
               localStorage.removeItem('LP3ITGB:token');
-              localStorage.removeItem("bucket");
+              localStorage.removeItem("LP3ITGB:bucket");
               navigate('/')
             }
           } catch (error) {
@@ -214,7 +214,6 @@ function Home() {
           }
 
           const decoded = jwtDecode(token);
-          setUser(decoded.data);
 
           const fetchProfile = async (token) => {
             const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
@@ -235,6 +234,7 @@ function Home() {
               classes: profileData.applicant.class,
               status: decoded.data.status,
             };
+            setUser(data);
             const responseUser = await axios.post(`https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/users`, data);
             if (responseUser) {
               setTimeout(() => {
@@ -252,7 +252,6 @@ function Home() {
                 const newToken = response.data;
                 const decodedNewToken = jwtDecode(newToken);
                 localStorage.setItem('LP3ITGB:token', newToken);
-                setUser(decodedNewToken.data);
                 const newProfileData = await fetchProfile(newToken);
                 const data = {
                   id_user: decodedNewToken.data.id,
@@ -263,6 +262,7 @@ function Home() {
                   classes: newProfileData.applicant.class,
                   status: decodedNewToken.data.status,
                 };
+                setUser(data);
                 const responseUser = await axios.post(`https://psikotest-gayabelajar-backend.politekniklp3i-tasikmalaya.ac.id/users`, data);
                 if (responseUser) {
                   setTimeout(() => {
@@ -287,7 +287,6 @@ function Home() {
             }
           }
         } catch (error) {
-          console.log(error);
           if (error.response) {
             if ([400, 403].includes(error.response.status)) {
               localStorage.removeItem('LP3ITGB:token');
@@ -319,7 +318,6 @@ function Home() {
     getInfo();
   }, []);
 
-
   return (
     errorPage ? (
       <ServerError />
@@ -333,9 +331,7 @@ function Home() {
               <img src={logoLp3i} alt="logo lp3i" className="h-14" />
               <img src={logoTagline} alt="logo lp3i" className="h-12" />
             </div>
-            <div className="">
-              <Lottie animationData={awanLp3i} loop={true} className="h-52" />
-            </div>
+            <Lottie animationData={awanLp3i} loop={true} className="h-52" />
             <div className="text-center space-y-2">
               <h2 className="uppercase font-bold text-3xl">Tes Gaya Belajar</h2>
               <p className="text-sm">

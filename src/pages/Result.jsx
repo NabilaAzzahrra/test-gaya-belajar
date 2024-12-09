@@ -4,10 +4,11 @@ import { jwtDecode } from 'jwt-decode'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import backgroundImage from '../assets/img/background.png'
 import questionImage from '../assets/img/awan-lp3i.json'
-import ServerError from './errors/ServerError'
+import backgroundImage from '../assets/img/background.png'
+
 import LoadingScreen from './LoadingScreen'
+import ServerError from './errors/ServerError'
 
 const Result = () => {
   const [user, setUser] = useState({});
@@ -20,7 +21,6 @@ const Result = () => {
 
   const getInfo = async () => {
     setLoading(true);
-
     try {
       const token = localStorage.getItem('LP3ITGB:token');
       if (!token) {
@@ -28,8 +28,6 @@ const Result = () => {
       }
 
       const decoded = jwtDecode(token);
-      setUser(decoded.data);
-
       const fetchProfile = async (token) => {
         const response = await axios.get('https://pmb-api.politekniklp3i-tasikmalaya.ac.id/profiles/v1', {
           headers: { Authorization: token },
@@ -61,7 +59,6 @@ const Result = () => {
             const newToken = response.data;
             const decodedNewToken = jwtDecode(newToken);
             localStorage.setItem('LP3ITGB:token', newToken);
-            setUser(decodedNewToken.data);
             const newProfileData = await fetchProfile(newToken);
             const data = {
               id: decodedNewToken.data.id,
@@ -145,7 +142,7 @@ const Result = () => {
         if (responseData) {
           alert(responseData.data.message);
           localStorage.removeItem('LP3ITGB:token');
-          localStorage.removeItem("bucket");
+          localStorage.removeItem("LP3ITGB:bucket");
           navigate('/')
         }
       } catch (error) {
@@ -164,7 +161,7 @@ const Result = () => {
             if (responseData) {
               alert(responseData.data.message);
               localStorage.removeItem('LP3ITGB:token');
-              localStorage.removeItem("bucket");
+              localStorage.removeItem("LP3ITGB:bucket");
               navigate('/')
             }
           } catch (error) {
@@ -232,10 +229,8 @@ const Result = () => {
         >
           <div style={backgroundImageStyle}></div>
           <div style={overlayStyle}></div>
-          <div>
-            <Lottie animationData={questionImage} loop={true} className="h-40" />
-          </div>
-          <div className="bg-white shadow-xl p-4 text-center rounded-3xl">
+          <Lottie animationData={questionImage} loop={true} className="h-40" />
+          <div className="max-w-xl mx-auto bg-white shadow-xl p-4 text-center rounded-3xl">
             <div className="font-bold text-[30px] my-2">{user.name}</div>
             <hr className="border boreder-2 my-4 mx-4" />
 
